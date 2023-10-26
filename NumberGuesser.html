@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title> Number Guesser</title>
+        <style>
+            body {
+                background-color: dodgerblue;
+            }
+        
+        </style>
+        <script>
+            var theNumber = 88
+            var currentGuess=0
+            var message="Pick a number 1 to 100"
+            function guess()    {
+                currentGuess = Number(document.getElementById("userGuess").value);
+                if(currentGuess>theNumber)  {
+                    message = "You Guessed Too High Try Something Lower"
+                }
+                if(currentGuess>theNumber)  {
+                    message = "You Guessed Too High Try Something Lower"
+                }
+                if(currentGuess==theNumber) {
+                    message = "Congrats you got the number!"
+                    document.getElementById("guessButton").disabled = true;
+                }
+                numGuesses++;
+                document.getElementById("numGuess").innerHTML = "Number of Guess:" + numGuesses++; 
+                document.getElementById("numGuess").innerHTML = "Your last guess was:" + currentGuess;
+                document.getElementById("messageDisplay").innerHTML = message;
+                        }
+        </script>
+    </head>
+    <body>
+        <h1>Guess My Number</h1>
+        <p id="messageDisplay">Pick a number from 1 to 100</p>
+        <br><input id="userGuess">
+        <button onclick="guess();">Check</button>
+        <p id="numguess">Number of Guesses :</p>
+        <p id="lastGuess"> Last Guess:</p>
+
+</html>
