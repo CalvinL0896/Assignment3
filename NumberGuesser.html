@@ -1,41 +1,126 @@
+
+<!DOCTYPE html>
 <html>
     <head>
-        <title> Number Guesser</title>
-        <style>
-            body {
-                background-color: dodgerblue;
-            }
-        
-        </style>
-        <script>
-            var theNumber = 88
-            var currentGuess=0
-            var message="Pick a number 1 to 100"
-            function guess()    {
-                currentGuess = Number(document.getElementById("userGuess").value);
-                if(currentGuess>theNumber)  {
-                    message = "You Guessed Too High Try Something Lower"
-                }
-                if(currentGuess>theNumber)  {
-                    message = "You Guessed Too High Try Something Lower"
-                }
-                if(currentGuess==theNumber) {
-                    message = "Congrats you got the number!"
-                    document.getElementById("guessButton").disabled = true;
-                }
-                numGuesses++;
-                document.getElementById("numGuess").innerHTML = "Number of Guess:" + numGuesses++; 
-                document.getElementById("numGuess").innerHTML = "Your last guess was:" + currentGuess;
-                document.getElementById("messageDisplay").innerHTML = message;
-                        }
-        </script>
+        <title>Number Guesser</title>
     </head>
-    <body>
-        <h1>Guess My Number</h1>
-        <p id="messageDisplay">Pick a number from 1 to 100</p>
-        <br><input id="userGuess">
-        <button onclick="guess();">Check</button>
-        <p id="numguess">Number of Guesses :</p>
-        <p id="lastGuess"> Last Guess:</p>
 
+    <style>
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            /* box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9); */
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0d5fd2;
+            overscroll-behavior: none;
+            display: flex;
+        }
+
+
+
+        h1 {
+            color: #000000;
+            text-align: center;
+            margin: 0%;
+            margin-top: 20px;   
+        }
+
+        #guessInput {
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 90%;
+            max-width: 700px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none; 
+            outline: none; 
+        }
+
+        #guessInput:focus {
+            background-color: white;
+        }
+
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+        }
+        #guessBtn {
+            background-color: #079300;
+        }
+
+        #resetBtn {
+            background-color: #6c757d;
+        }
+
+        .button-container {
+           display:flex; 
+           gap:10px; 
+        }
+        h1 {
+            font-size: xxx-large;
+        }
+
+    </style>
+
+    <body>
+        <div class="container">
+            <h1>Guess the Number</h1>            
+            <input type="number" id="guessInput" placeholder="Enter your guess">
+            <div class="button-container">
+                <button id="guessBtn">Guess</button>
+                <button id="resetBtn" disabled>Reset</button>
+            </div>
+            <p id="message"></p>
+        </div>
+
+        <script>
+
+            var randomNumber = Math.floor(Math.random() * 100) + 1;
+            var guessCount = 0;
+
+            document.getElementById('guessBtn').addEventListener('click', function() {
+                var userGuess = document.getElementById('guessInput').value;
+            
+
+                if (userGuess > randomNumber) {
+                    document.getElementById('message').textContent = "Too high try something lower";
+                } else if (userGuess < randomNumber) {
+                    document.getElementById('message').textContent = "Too low try somthing higher";
+                } else {
+                    document.getElementById('message').textContent = "you guessed the number";
+                    document.getElementById('guessBtn').disabled = true;
+                    document.getElementById('resetBtn').disabled = false;
+                }
+            
+                document.getElementById('guessInput').value = '';
+            });
+
+            document.getElementById('resetBtn').addEventListener('click', function() {
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+                guessCount = 0;
+            
+                var messages = ["Game reset. Guess a new number!", "The game has been reset. Time for a new guess!", "Reset successful. Can you guess the new number?"];
+                var message = messages[Math.floor(Math.random() * messages.length)];
+
+                document.getElementById('message').textContent = message;
+            
+                document.getElementById('guessBtn').disabled = false;
+                this.disabled = true;
+                this.classList.remove('enabled');
+            });
+
+        </script>
+
+    </body>
 </html>
